@@ -21,28 +21,53 @@ class Fraction{
     c = _c;
     l = _l;
     m = _m;
+    if(c<0){
+        if(l<0){
+            l = l*-1;
+            cout<<"Blad matematyczny, zamieniono czesc ulamka na dodatnia"<<endl;
+            }
+        if(m<0){
+            m = m*-1;
+            cout<<"Blad matematyczny, zamieniono czesc ulamka na dodatnia"<<endl;
+        }
+
+    }
     }
     void set_m(int _m){
     m = _m;
-    if(m==0) cout<<"Mianownik nie moze byæ zerem"; m=1;
+    if(m==0) cout<<"Mianownik nie moze byÄ‡ zerem"; m=1;
     }
     void set_l(int _l){
     l = _l;
     }
+    void toWrong(){
+        return;
+    }
+    void toMixed(){
+    bool nflag = false;
+    if(l<0) l = l*-1;nflag=true;
+    while(l>=m){
+                c++;
+                l-=m;
+            }
+    if(nflag==true) l = l*-1;
+    }
     void normalize()
     {
-        while(l>=m){
-            c++;
-            l-=m;
-        }
-        if((c!=0 && l!=0 c*l*m>0) || (l==0 && c*m>0) || (c==0 && l*m>0){
-            c = abs(c);
+        if((c!=0 && l!=0 && c*l*m>0) || (l==0 && c*m>0)){
+            if(c<0) c = c*-1;
            }
            else{
-             c = abs(c)*-1;
+            if((c==0 && l*m<0)) {
+                if(l>0)l = l*-1;
+                if(m<0)m = m*-1;
+                toMixed();
+                return;
+            }
+             if(c>0)c = c*-1;
            }
-            l = abs(l);
-            m = abs(m);
+        if(l<0)l = l*-1;
+        if(m<0)m = m*-1;
     }
     void show()
     {
@@ -66,7 +91,7 @@ class Fraction{
 
 int main()
 {
-    Fraction A(-3,2), B(3,-2), C;
+    Fraction A(-3,2), B(3,2), C;
     C = A * B;
     C.show();
     C.normalize();
